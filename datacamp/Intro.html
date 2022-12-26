@@ -1,0 +1,2242 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Processing in Python &#8212; Image processing with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Image processing with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../intro.html">
+   Welcome to your Jupyter Book
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Image processing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../read_show_save_imgs.html">
+   1. Read, show, and save imgs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../color_transform.html">
+   2. Color transform
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/datacamp/Intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdatacamp/Intro.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/datacamp/Intro.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intro">
+   Intro
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     彩色圖片
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     黑白圖片
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#histogram">
+     Histogram
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   基礎影像處理
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rgb-rgb">
+     rgb 改 灰階，或，灰階 改 rgb
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     翻轉圖片
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thresholding">
+     Thresholding
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#global-threshold">
+       Global threshold
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#local-threshold">
+       Local threshold
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#filters">
+   Filters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-detection">
+     Edge detection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smoothing">
+     smoothing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contrast-enhancement">
+     Contrast enhancement (加強對比度)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#global-method">
+       global method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#local-method">
+       local method
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transformation">
+   Transformation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rotate">
+     rotate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rescale-aliasing">
+     rescale &amp; aliasing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#morphology">
+     Morphology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-restoration">
+   Image restoration(影像修復)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     重建指定的區域
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#denoise">
+     Denoise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#superpixel-segementation">
+     Superpixel segementation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Image Processing in Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intro">
+   Intro
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     彩色圖片
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     黑白圖片
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#histogram">
+     Histogram
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   基礎影像處理
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rgb-rgb">
+     rgb 改 灰階，或，灰階 改 rgb
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     翻轉圖片
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#thresholding">
+     Thresholding
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#global-threshold">
+       Global threshold
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#local-threshold">
+       Local threshold
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#filters">
+   Filters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#edge-detection">
+     Edge detection
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#smoothing">
+     smoothing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contrast-enhancement">
+     Contrast enhancement (加強對比度)
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#global-method">
+       global method
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#local-method">
+       local method
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transformation">
+   Transformation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rotate">
+     rotate
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rescale-aliasing">
+     rescale &amp; aliasing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#morphology">
+     Morphology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-restoration">
+   Image restoration(影像修復)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     重建指定的區域
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#denoise">
+     Denoise
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#superpixel-segementation">
+     Superpixel segementation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="image-processing-in-python">
+<h1>Image Processing in Python<a class="headerlink" href="#image-processing-in-python" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">color</span> <span class="c1"># 拿裡面的 data 來用，color裡面則是有很多顏色處理的function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">show_image</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Image&quot;</span><span class="p">,</span> <span class="n">cmap_type</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">):</span> 
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap_type</span><span class="p">)</span> <span class="c1"># cmap 是 color mapping 的縮寫，意思就是顏色的 gradient。例如數字的大小，你要用灰階，或是彩虹，或是xxx來呈現。</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="intro">
+<h2>Intro<a class="headerlink" href="#intro" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>首先要介紹 “影像” 到底是啥？</p>
+<ul>
+<li><p>如果是灰階圖片，那他就是個 2d-array (e.g. 1024x1024)</p></li>
+<li><p>如果是彩色圖片，那他就是個 3d-array (e.g. 1024x1024x3)</p></li>
+<li><p>這些 array 中的數字，介於 0 ~ 255 之間。0表示程度很低，255表示程度很高。所以以灰階圖片來說，０就是黑色，255是白色，那中間的數字，就在說明顏色的深淺。</p></li>
+</ul>
+</li>
+<li><p>我們可以用 <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code>裡面的函數，來讀取/顯示影像 (e.g. 先引入 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code>)</p>
+<ul>
+<li><p>讀取影像(e.g <code class="docutils literal notranslate"><span class="pre">my_image</span> <span class="pre">=</span> <span class="pre">plt.imread(&quot;my_image.jpeg&quot;)</span></code>)：讀進來，就可以看到 <code class="docutils literal notranslate"><span class="pre">my_image</span></code> 就是上面說的 2d or 3d array。</p></li>
+<li><p>顯示影像(e.g. <code class="docutils literal notranslate"><span class="pre">plt.imshow(my_image)</span></code>)：把 2d or 3d array 給顯示成圖片。</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>很快來看個例子：</p></li>
+</ul>
+<div class="section" id="id1">
+<h3>彩色圖片<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 1/fruits-2.jpg&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(417, 626, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，這張圖片的 shape 是 417 x 636 x 3，表示他的像素是 417 x 636; 然後是三個通道的彩色圖片</p></li>
+<li><p>圖片長這樣：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">my_image</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_8_0.png" src="../_images/Intro_8_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>背後的 numpy array 長這樣：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_image</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        ...,
+        [255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255]],
+
+       [[255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        ...,
+        [255, 255, 255],
+        [254, 254, 254],
+        [254, 254, 254]],
+
+       [[255, 255, 255],
+        [255, 255, 255],
+        [255, 255, 255],
+        ...,
+        [255, 255, 255],
+        [254, 254, 254],
+        [254, 254, 254]],
+
+       ...,
+
+       [[254, 254, 254],
+        [254, 254, 254],
+        [254, 254, 254],
+        ...,
+        [254, 254, 254],
+        [254, 254, 254],
+        [254, 254, 254]],
+
+       [[254, 254, 255],
+        [254, 254, 255],
+        [254, 254, 255],
+        ...,
+        [254, 254, 254],
+        [254, 254, 254],
+        [254, 254, 254]],
+
+       [[254, 254, 254],
+        [254, 254, 254],
+        [255, 255, 255],
+        ...,
+        [254, 254, 254],
+        [255, 255, 255],
+        [254, 254, 254]]], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>第一個通道(紅色)的 array 長這樣：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_image</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[255, 255, 255, ..., 255, 255, 255],
+       [255, 255, 255, ..., 255, 254, 254],
+       [255, 255, 255, ..., 255, 254, 254],
+       ...,
+       [254, 254, 254, ..., 254, 254, 254],
+       [254, 254, 254, ..., 254, 254, 254],
+       [254, 254, 255, ..., 254, 255, 254]], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>把三個通道分別畫成圖長這樣：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">my_image</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span> <span class="c1"># 紅色通道，數值大小，用灰階來呈現</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">my_image</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span> <span class="c1"># 綠色通道，數值大小，用灰階來呈現</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">my_image</span><span class="p">[:,:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span> <span class="c1"># 藍色通道，數值大小，用灰階來呈現</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_14_0.png" src="../_images/Intro_14_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>黑白圖片<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>黑白圖片，我們從<code class="docutils literal notranslate"><span class="pre">skimage</span></code>裡面的data模組來取：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coins_image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">coins_image</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_17_0.png" src="../_images/Intro_17_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，這是張灰階圖片，來看下他的 sahpe 和 內容：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">coins_image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coins_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(303, 384)
+[[ 47 123 133 ...  14   3  12]
+ [ 93 144 145 ...  12   7   7]
+ [126 147 143 ...   2  13   3]
+ ...
+ [ 81  79  74 ...   6   4   7]
+ [ 88  82  74 ...   5   7   8]
+ [ 91  79  68 ...   4  10   7]]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，是 303x384 的 shape，只是個 2d array (只有一個通道了)</p></li>
+<li><p>內容是 0~255 的數字</p></li>
+</ul>
+</div>
+<div class="section" id="histogram">
+<h3>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>讀取一張圖片後，如果有 RGB 三個 channel，那每個 channel 就會是一張矩陣，裡面的數值代表 R or G or B 的程度 (0就是沒有程度，255就是程度最高)</p></li>
+<li><p>所以，我如果取出 R channel 的矩陣後，可以把裡面的 element 全都拿出來，做個 histogram，就可以知道，這張圖紅色程度的分布狀況</p></li>
+<li><p>來看個例子，原始圖片長這樣：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 1/4.1.01.tiff&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_23_0.png" src="../_images/Intro_23_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>我們可以取出紅色 channel 的矩陣來：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The shape of original image: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">image</span><span class="p">)))</span>
+<span class="n">red_channel</span> <span class="o">=</span> <span class="n">image</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The shape of red_channel image: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">red_channel</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;red_channel data:&quot;</span><span class="p">)</span>
+<span class="n">red_channel</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The shape of original image: (256, 256, 3)
+The shape of red_channel image: (256, 256)
+red_channel data:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 52,  47,  50, ..., 137, 126, 126],
+       [ 55,  50,  54, ..., 129, 129, 121],
+       [ 46,  49,  52, ..., 126, 123, 118],
+       ...,
+       [  4,   3,   3, ...,  60,  84,  98],
+       [ 11,  12,  12, ...,  60,  86, 100],
+       [ 20,  19,  20, ...,  55,  70,  93]], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>如果要畫圖的話，我想把這個 2-d array，先轉成向量，可以這樣做：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">red_channel_vector</span> <span class="o">=</span> <span class="n">red_channel</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The shape of red_channel_vector: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">red_channel_vector</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The red_channel_vector data: &quot;</span><span class="p">)</span>
+<span class="n">red_channel_vector</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The shape of red_channel_vector: (65536,)
+The red_channel_vector data: 
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([52, 47, 50, ..., 55, 70, 93], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>大功告成，來畫圖吧：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">red_channel_vector</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Red Histogram&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_29_0.png" src="../_images/Intro_29_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，pixels 的值，頗集中在100以下，表示這張圖的紅色，大多是 bright red pixels，比較亮紅</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>基礎影像處理<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>由此可知，影像處理，就是把圖片先載進來變成 2d or 3d array後，我們去對裡面的數字做手腳，那再把這個矩陣寫回成圖片，就完成影像處理了。而 <code class="docutils literal notranslate"><span class="pre">numpy</span></code> 和 <code class="docutils literal notranslate"><span class="pre">skimage</span></code> 這2個package裡面就有很多好用的 function，可以幫我們做這些處理。例如：</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">skimage.color.rgb2gray()</span></code> 可以把rgb圖片轉成灰階， <code class="docutils literal notranslate"><span class="pre">skimage.color.gray2rgb()</span></code> 可以把灰階轉成rgb.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.flipud(my_image)</span></code> 可以把我的圖片 up down 翻轉，<code class="docutils literal notranslate"><span class="pre">np.fliplr(my_image)</span></code> 可以把我的圖片 left right 翻轉</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="rgb-rgb">
+<h3>rgb 改 灰階，或，灰階 改 rgb<a class="headerlink" href="#rgb-rgb" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>我們可以用 <code class="docutils literal notranslate"><span class="pre">skimage</span></code> 裡面的 <code class="docutils literal notranslate"><span class="pre">color</span></code> 這個模組下的</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">rgb2gray()</span></code>，可把rgb的影像，轉成灰階 (所以會從 3d array 被轉成 2d array)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gray2rgb()</span></code>，可把灰階的影像，轉成 rgb</p></li>
+</ul>
+</li>
+<li><p>來試試看吧：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_image_gray</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">my_image</span><span class="p">)</span>
+<span class="n">my_image_gray</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(417, 626)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，現在圖片只剩二維，來看一下資料：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_image_gray</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 1.        , 1.        , ..., 1.        , 1.        ,
+        1.        ],
+       [1.        , 1.        , 1.        , ..., 1.        , 0.99607843,
+        0.99607843],
+       [1.        , 1.        , 1.        , ..., 1.        , 0.99607843,
+        0.99607843],
+       ...,
+       [0.99607843, 0.99607843, 0.99607843, ..., 0.99607843, 0.99607843,
+        0.99607843],
+       [0.99636118, 0.99636118, 0.99636118, ..., 0.99607843, 0.99607843,
+        0.99607843],
+       [0.99607843, 0.99607843, 1.        , ..., 0.99607843, 1.        ,
+        0.99607843]])
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>的確變成二維，但資料現在是 0 ~ 1 之間了，不是 0 ~ 255 (不知為何)</p></li>
+<li><p>看一下圖：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">my_image_gray</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_39_0.png" src="../_images/Intro_39_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>如果把它轉回來</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_image_reconstruct</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">gray2rgb</span><span class="p">(</span><span class="n">my_image_gray</span><span class="p">)</span>
+<span class="n">my_image_reconstruct</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(417, 626, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>的確變回 3d array，但…蠻怪的，一維不知怎麼變回三維。</p></li>
+<li><p>來看看圖：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">my_image_reconstruct</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_43_0.png" src="../_images/Intro_43_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>恩…看起來還是很灰階，不知道是不是因為各個通道都介於 0 ~ 1 之間</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_image_reconstruct</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 1.        , 1.        , ..., 1.        , 1.        ,
+        1.        ],
+       [1.        , 1.        , 1.        , ..., 1.        , 0.99607843,
+        0.99607843],
+       [1.        , 1.        , 1.        , ..., 1.        , 0.99607843,
+        0.99607843],
+       ...,
+       [0.99607843, 0.99607843, 0.99607843, ..., 0.99607843, 0.99607843,
+        0.99607843],
+       [0.99636118, 0.99636118, 0.99636118, ..., 0.99607843, 0.99607843,
+        0.99607843],
+       [0.99607843, 0.99607843, 1.        , ..., 0.99607843, 1.        ,
+        0.99607843]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_image_reconstruct</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 1.        , 1.        , ..., 1.        , 1.        ,
+        1.        ],
+       [1.        , 1.        , 1.        , ..., 1.        , 0.99607843,
+        0.99607843],
+       [1.        , 1.        , 1.        , ..., 1.        , 0.99607843,
+        0.99607843],
+       ...,
+       [0.99607843, 0.99607843, 0.99607843, ..., 0.99607843, 0.99607843,
+        0.99607843],
+       [0.99636118, 0.99636118, 0.99636118, ..., 0.99607843, 0.99607843,
+        0.99607843],
+       [0.99607843, 0.99607843, 1.        , ..., 0.99607843, 1.        ,
+        0.99607843]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3>翻轉圖片<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>他的概念，就是把本來 RGB 三個通道的矩陣數值，做上下的翻轉</p></li>
+<li><p>做個實驗就知道了</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]);</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;原圖&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_exp</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;原圖做上下翻轉後&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">my_exp</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;原圖做左右翻轉後&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">my_exp</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>原圖
+[[1 2]
+ [3 4]]
+原圖做上下翻轉後
+[[3 4]
+ [1 2]]
+原圖做左右翻轉後
+[[2 1]
+ [4 3]]
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>那現在換成圖片，他就是做一樣的事，來看看原圖的樣子：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flipped_seville</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;./dataset/chapter 1/sevilleup(2).jpg&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">flipped_seville</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_51_0.png" src="../_images/Intro_51_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>那我希望把它上下翻轉，我可以這樣做：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seville_vertical_flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">flipped_seville</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">seville_vertical_flip</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_53_0.png" src="../_images/Intro_53_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>如果我想左右翻轉，我可以這樣做:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seville_horizontal_flip</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">seville_vertical_flip</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">seville_horizontal_flip</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_55_0.png" src="../_images/Intro_55_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="thresholding">
+<h3>Thresholding<a class="headerlink" href="#thresholding" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Thresholding 照字面的意思，就是要訂一個閾值。</p></li>
+<li><p>這個閾值</p>
+<ul>
+<li><p>可以是 global 的閾值 (e.g. 200)，那我的整張圖片的矩陣數值資料中，只要大於 200，我就 coding 為 255，否則 coding 為 0</p></li>
+<li><p>也可以是 local 的閾值 (e.g. 左上角的區域，200; 左下角的區域，100; …)，那我整張圖片的矩陣數值資料，就是去和 local 閾值比，大於 200，我就 coding 為 255，否則 coding 為 0</p></li>
+</ul>
+</li>
+<li><p>所以，做完 thresholding 後，以灰階為例，就變成非黑即白的高對比圖片。</p></li>
+<li><p>那轉成黑白要幹麻？簡單講，就是把訊號(foreground)跟雜訊(background)給區分出來，就可以專注在看訊號就好。</p></li>
+<li><p>如果是彩色圖片，也很常先轉灰階，在做 thresholding，得到黑白圖片.</p></li>
+</ul>
+<div class="section" id="global-threshold">
+<h4>Global threshold<a class="headerlink" href="#global-threshold" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>Global threshold 的意思，就是整張圖片，我只訂一個 global 的閾值</p></li>
+<li><p>這種做法，適用在 background 是很 uniform 的時候 (就是 background 的區域的那些數值的 variation 很小)</p></li>
+<li><p>來看個例子，我有張圖長這樣：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools_image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;./dataset/chapter 1/shapes52.jpg&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tools_image</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_60_0.png" src="../_images/Intro_60_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以明顯的看出來，紅色是背景，其他是 signal</p></li>
+<li><p>而且，背景一看就全是紅的，非常均勻，所以用 global threshold 就好</p></li>
+<li><p>那標準動作，先把圖片轉灰階：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gray_tools_image</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">tools_image</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gray_tools_image</span><span class="p">,</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_62_0.png" src="../_images/Intro_62_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">gray_tools_image</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">gray_tools_image</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">256</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(417, 626)
+</pre></div>
+</div>
+<img alt="../_images/Intro_63_1.png" src="../_images/Intro_63_1.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，轉成灰階後，變成 417*626 的矩陣，裡面的數值，都介於 0~1 之間</p></li>
+<li><p>從 hisgogram 來看，資料似乎都集中在 0.4 以下的區域，只剩下少部分的資料在 0.4以上.</p></li>
+<li><p>那從圖片來看，背景本來就應該站絕大絕大多數的像素，所以，我如果把 threshold 訂在 0.4 ，那也許就能區分出背景和主角</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_threshold</span> <span class="o">=</span> <span class="p">(</span><span class="n">gray_tools_image</span> <span class="o">&gt;</span> <span class="mf">0.4</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_threshold</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">my_threshold</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ ...
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]]
+</pre></div>
+</div>
+<img alt="../_images/Intro_65_1.png" src="../_images/Intro_65_1.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>每賣喔～這樣大概可以猜到，global thresholding 的演算法，就是要找到一個閾值k，使得背景和主角分的越開越好.</p></li>
+<li><p>那我們這邊就直接用套件吧</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skimage</span></code> 裡的 <code class="docutils literal notranslate"><span class="pre">filters</span></code> 模組裡面，有各種演算法來當你找出 optimal threshold，這邊先介紹 <code class="docutils literal notranslate"><span class="pre">otsu</span></code> 這種方法，funtion name 叫 <code class="docutils literal notranslate"><span class="pre">threshold_otsu</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">threshold_otsu</span>
+
+<span class="c1"># Obtain the optimal threshold value with otsu</span>
+<span class="n">thresh</span> <span class="o">=</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">gray_tools_image</span><span class="p">)</span>
+
+<span class="c1"># 看一下 thresh 的數值</span>
+<span class="n">thresh</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.46032394761029416
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>看起來很接近我剛剛自己猜的 0.4 了。那來試試這個比較精準的 threshold 吧：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binary_image</span> <span class="o">=</span> <span class="n">gray_tools_image</span> <span class="o">&gt;</span> <span class="n">thresh</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">binary_image</span><span class="p">,</span> <span class="s1">&#39;gray&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_69_0.png" src="../_images/Intro_69_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>搞定了，現在的圖片，就變成黑白而已。</p></li>
+<li><p>除了 <code class="docutils literal notranslate"><span class="pre">otsu</span></code> 外，還有很多種算 optimal threshold 的方法。</p></li>
+<li><p>我們可以用 <code class="docutils literal notranslate"><span class="pre">try_all_threshold()</span></code> 這個 function 來一網打盡，看哪個比較好：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">try_all_threshold</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">try_all_threshold</span><span class="p">(</span><span class="n">gray_tools_image</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>skimage.filters.thresholding.threshold_isodata
+skimage.filters.thresholding.threshold_li
+skimage.filters.thresholding.threshold_mean
+skimage.filters.thresholding.threshold_minimum
+skimage.filters.thresholding.threshold_otsu
+skimage.filters.thresholding.threshold_triangle
+skimage.filters.thresholding.threshold_yen
+</pre></div>
+</div>
+<img alt="../_images/Intro_71_1.png" src="../_images/Intro_71_1.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，除了剛剛用過的 <code class="docutils literal notranslate"><span class="pre">otsu</span></code> 外，還有 6 種方法。但課程裡是都沒講這些方法的原理啦。</p></li>
+</ul>
+</div>
+<div class="section" id="local-threshold">
+<h4>Local threshold<a class="headerlink" href="#local-threshold" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>有時候，background不是那麼容易分辨，換句話說，background的區域所對應到的那堆數字，variation很大的時候，那就不適合只用單一global threshold 去切分，而是要不同區域用不同的 threshold 來切分</p></li>
+<li><p>這種做法，就是 local threshold</p></li>
+<li><p>舉例來說，我現在有張圖片長這樣：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_page_original</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;./dataset/chapter 1/text_page.jpg&quot;</span><span class="p">)</span>
+<span class="n">page_image</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">text_page_original</span><span class="p">)</span><span class="o">*</span><span class="mi">255</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">page_image</span><span class="p">,</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_75_0.png" src="../_images/Intro_75_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，背景是很不均勻的，如果我畫他的 histogram，會長這樣：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">page_image</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">256</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_77_0.png" src="../_images/Intro_77_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以發現，資料沒有很明顯的集中在哪裡，也就是背景的像素數字大小是分散的。</p></li>
+<li><p>所以，可以想像，用 global thresholding 的效果不會太好：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obtain the optimal otsu global thresh value</span>
+<span class="n">global_thresh</span> <span class="o">=</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">page_image</span><span class="p">)</span>
+
+<span class="c1"># Obtain the binary image by applying global thresholding</span>
+<span class="n">binary_global</span> <span class="o">=</span> <span class="n">page_image</span> <span class="o">&gt;</span> <span class="n">global_thresh</span>
+
+<span class="c1"># Show the binary image obtained</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">binary_global</span><span class="p">,</span> <span class="s1">&#39;Global thresholding&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_79_0.png" src="../_images/Intro_79_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>那如果改成 local thresholding:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the local threshold function</span>
+<span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">threshold_local</span>
+
+<span class="c1"># Set the block size to 35</span>
+<span class="n">block_size</span> <span class="o">=</span> <span class="mi">35</span>
+
+<span class="c1"># Obtain the optimal local thresholding</span>
+<span class="n">local_thresh</span> <span class="o">=</span> <span class="n">threshold_local</span><span class="p">(</span><span class="n">page_image</span><span class="p">,</span> <span class="n">block_size</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Obtain the binary image by applying local thresholding</span>
+<span class="n">binary_local</span> <span class="o">=</span> <span class="n">page_image</span> <span class="o">&gt;</span> <span class="n">local_thresh</span>
+
+<span class="c1"># Show the binary image</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">binary_local</span><span class="p">,</span> <span class="s1">&#39;Local thresholding&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_81_0.png" src="../_images/Intro_81_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，效果有比較好了。來看看他的 local 閾值</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">local_thresh</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[115.61205444, 115.74809474, 116.0130664 , ..., 165.04046072,
+        164.99800755, 164.97534566],
+       [115.90690542, 116.04150117, 116.30365651, ..., 165.12585896,
+        165.08232485, 165.05908989],
+       [116.48060471, 116.61241352, 116.86913412, ..., 165.28483187,
+        165.2391841 , 165.21483082],
+       ...,
+       [172.71352617, 172.73978733, 172.78898383, ..., 166.29693803,
+        165.90156598, 165.69604183],
+       [172.85026087, 172.87879006, 172.93228549, ..., 166.08484146,
+        165.67927438, 165.46841166],
+       [172.92029422, 172.94999271, 173.00570422, ..., 165.97330777,
+        165.56260417, 165.34905153]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="filters">
+<h2>Filters<a class="headerlink" href="#filters" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>filter 是用來 enhancing an image，例如：</p>
+<ul>
+<li><p>edge detection (把圖型的輪廓/邊緣標出來)</p></li>
+<li><p>smoothing (blurring to reduce noice)</p></li>
+<li><p>emphasize or remove features</p></li>
+<li><p>sharpening</p></li>
+</ul>
+</li>
+</ul>
+<div class="section" id="edge-detection">
+<h3>Edge detection<a class="headerlink" href="#edge-detection" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>edge detection(邊緣檢測) 是 computer vision裡的一個技術</p></li>
+<li><p>這邊介紹了 <code class="docutils literal notranslate"><span class="pre">索伯算子（Sobel</span> <span class="pre">operator</span></code>，他是圖像處理中的算子之一，有時又稱為索伯-費德曼算子或索貝濾波器</p></li>
+<li><p>課程都沒講他的原理，看 wiki 可以知道，概念上，索伯算子就是一個2個整數型的矩陣(都是3x3)，對整張影像在水平及垂直方向上做捲積，做完後後，就可以得到一張圖像的邊緣特徵。 * 課程只有給你 code，如下：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 原圖</span>
+<span class="n">soaps_image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;./dataset/chapter 2/soap_image.jpg&quot;</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">soaps_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_88_0.png" src="../_images/Intro_88_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the filters module and sobel function</span>
+<span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">sobel</span>
+
+<span class="c1"># 先轉灰階</span>
+<span class="n">soaps_image_gray</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">soaps_image</span><span class="p">)</span>
+
+<span class="c1"># Apply edge detection filter</span>
+<span class="n">edge_sobel</span> <span class="o">=</span> <span class="n">sobel</span><span class="p">(</span><span class="n">soaps_image_gray</span><span class="p">)</span>
+
+<span class="c1"># Show original and resulting image to compare</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">soaps_image</span><span class="p">,</span> <span class="s2">&quot;Original&quot;</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">edge_sobel</span><span class="p">,</span> <span class="s2">&quot;Edges with Sobel&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_89_0.png" src="../_images/Intro_89_0.png" />
+<img alt="../_images/Intro_89_1.png" src="../_images/Intro_89_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_comparison</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="n">filtered</span><span class="p">,</span> <span class="n">title_filtered</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span>
+        <span class="n">ncols</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;original&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">filtered</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title_filtered</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    
+
+<span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">sobel</span>
+
+<span class="c1"># edge detection filter</span>
+<span class="n">edge_sobel</span> <span class="o">=</span> <span class="n">sobel</span><span class="p">(</span><span class="n">image_coins</span><span class="p">)</span>
+<span class="n">plot_comparison</span><span class="p">(</span><span class="n">image_coins</span><span class="p">,</span> <span class="n">edge_sobel</span><span class="p">,</span> <span class="s2">&quot;Edge with Sobel&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">gaussian</span>
+<span class="n">gaussian_image</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">amsterdam_pic</span><span class="p">,</span> <span class="n">multichannel</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">plot_comparison</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="smoothing">
+<h3>smoothing<a class="headerlink" href="#smoothing" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>我們來看一下這張照片</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">building_image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 2/building_image.jpg&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">building_image</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_93_0.png" src="../_images/Intro_93_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>現在，我們想讓照片的那些尖角的地方，變得圓滑一點(smoothing).</p></li>
+<li><p>這邊介紹的是 <code class="docutils literal notranslate"><span class="pre">gaussian</span> <span class="pre">filter</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Gaussian filter </span>
+<span class="kn">from</span> <span class="nn">skimage.filters</span> <span class="kn">import</span> <span class="n">gaussian</span>
+
+<span class="c1"># Apply filter</span>
+<span class="n">gaussian_image</span> <span class="o">=</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">building_image</span><span class="p">,</span> <span class="n">multichannel</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show original and resulting image to compare</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">building_image</span><span class="p">,</span> <span class="s2">&quot;Original&quot;</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">gaussian_image</span><span class="p">,</span> <span class="s2">&quot;Reduced sharpness Gaussian&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_95_0.png" src="../_images/Intro_95_0.png" />
+<img alt="../_images/Intro_95_1.png" src="../_images/Intro_95_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="contrast-enhancement">
+<h3>Contrast enhancement (加強對比度)<a class="headerlink" href="#contrast-enhancement" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="global-method">
+<h4>global method<a class="headerlink" href="#global-method" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>以灰階影像為例，一張照片的對比度，就是用像素裡的最大值-最小值來決定。</p></li>
+<li><p>所以，如果想加大對比度，就是盡量讓像素的最小值往0拉，最大值往255拉，那圖片就會變得對比度比較強烈</p></li>
+<li><p>所以，這邊就介紹了 histogram equalization 的方法</p></li>
+<li><p>概念上，就像下圖(取自維基)：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%html</span>
+<span class="p">&lt;</span><span class="nt">img</span> <span class="na">src </span><span class="o">=</span> <span class="s">&quot;dataset/chapter 2/contrast_example.jpg&quot;</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><img src = "dataset/chapter 2/contrast_example.jpg">
+</div></div>
+</div>
+<ul class="simple">
+<li><p>算法上也很直覺，我要轉換某個像素的值的時候，先算出該值的PR，然後再乘以灰階級數(e.g. 0~255的話，灰階級數就是 255- 0 = 255)</p></li>
+<li><p>舉例來說，最左上角的像素，如果他原始灰階值是78，對應到整張圖後的PR是0.7，那轉換後的灰階值就是 0.7x255=178.5</p></li>
+<li><p>所以就可以了解，他就是想讓轉換後的像素的灰階值，是均勻的從0一路走到255</p></li>
+<li><p>接著來看看 code 可以怎麼寫</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 轉換前</span>
+<span class="n">chest_xray_image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 2/chest_xray_image.png&quot;</span><span class="p">);</span>
+<span class="n">contrast</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">chest_xray_image</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">chest_xray_image</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contrast = &quot;</span><span class="p">,</span> <span class="n">contrast</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">chest_xray_image</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">chest_xray_image</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">256</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast =  0.6745098
+</pre></div>
+</div>
+<img alt="../_images/Intro_101_1.png" src="../_images/Intro_101_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 轉換後</span>
+
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">exposure</span>
+
+<span class="c1"># Use histogram equalization to improve the contrast</span>
+<span class="n">xray_image_eq</span> <span class="o">=</span>  <span class="n">exposure</span><span class="o">.</span><span class="n">equalize_hist</span><span class="p">(</span><span class="n">chest_xray_image</span><span class="p">)</span>
+
+<span class="n">contrast</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">xray_image_eq</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">xray_image_eq</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Contrast = &quot;</span><span class="p">,</span> <span class="n">contrast</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xray_image_eq</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">xray_image_eq</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">256</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Contrast =  0.9804420471191406
+</pre></div>
+</div>
+<img alt="../_images/Intro_102_1.png" src="../_images/Intro_102_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_aerial</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 2/image_aerial.tiff&quot;</span><span class="p">)</span>
+
+<span class="c1"># Import the required module</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">exposure</span>
+
+<span class="c1"># Use histogram equalization to improve the contrast</span>
+<span class="n">image_eq</span> <span class="o">=</span>  <span class="n">exposure</span><span class="o">.</span><span class="n">equalize_hist</span><span class="p">(</span><span class="n">image_aerial</span><span class="p">)</span>
+
+<span class="c1"># Show the original and resulting image</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_aerial</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_eq</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_103_0.png" src="../_images/Intro_103_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，街道和很多細節都看得更清楚了</p></li>
+</ul>
+</div>
+<div class="section" id="local-method">
+<h4>local method<a class="headerlink" href="#local-method" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>剛剛介紹的 histogram，是對：</p>
+<ul>
+<li><p>灰階</p></li>
+<li><p>全部的像素，都做 equalize.</p></li>
+</ul>
+</li>
+<li><p>那對於彩色圖片，如果分別對 RGB 做 histogram equalization，出來的結果會有點不協調.</p></li>
+<li><p>所以，這邊介紹另一種 local 的 histogram equalization (可以想像，他是各個局部區域，自己做 histogram equalization，所以可以讓各個局部的contrast都變更大，細節更清楚)，叫做 Contrast Limited Adaptive Histogram Equalization (CLAHE)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the necessary modules</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">exposure</span>
+
+<span class="c1"># Load the image</span>
+<span class="n">original_image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coffee</span><span class="p">()</span>
+
+<span class="c1"># Apply the adaptive equalization on the original image</span>
+<span class="n">adapthist_eq_image</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">equalize_adapthist</span><span class="p">(</span><span class="n">original_image</span><span class="p">,</span> <span class="n">clip_limit</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
+
+<span class="c1"># Compare the original image to the equalized</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">original_image</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">adapthist_eq_image</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_107_0.png" src="../_images/Intro_107_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="transformation">
+<h2>Transformation<a class="headerlink" href="#transformation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rotate">
+<h3>rotate<a class="headerlink" href="#rotate" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>可以用 <code class="docutils literal notranslate"><span class="pre">skimage.transform.rotate()</span></code> 這個 function.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_cat</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 2/image_cat.jpg&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">skimage.transform</span> <span class="kn">import</span> <span class="n">rotate</span>
+
+<span class="c1"># 順時鐘轉 90 度</span>
+<span class="n">rotated_cat1</span> <span class="o">=</span> <span class="n">rotate</span><span class="p">(</span><span class="n">image_cat</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">)</span>
+
+<span class="c1"># 逆時鐘轉 90 度</span>
+<span class="n">rotated_cat2</span> <span class="o">=</span> <span class="n">rotate</span><span class="p">(</span><span class="n">image_cat</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_cat</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;original plot&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rotated_cat1</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;clock 90&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rotated_cat2</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;anti-clock 90&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_111_0.png" src="../_images/Intro_111_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="rescale-aliasing">
+<h3>rescale &amp; aliasing<a class="headerlink" href="#rescale-aliasing" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.transform</span> <span class="kn">import</span> <span class="n">rescale</span>
+
+<span class="c1"># Rescale with anti aliasing</span>
+<span class="n">rescaled_with_aa</span> <span class="o">=</span> <span class="n">rescale</span><span class="p">(</span><span class="n">rotated_cat1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">anti_aliasing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Rescale without anti aliasing</span>
+<span class="n">rescaled_without_aa</span> <span class="o">=</span> <span class="n">rescale</span><span class="p">(</span><span class="n">rotated_cat1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">anti_aliasing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rotated_cat1</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;original plot&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rescaled_with_aa</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;rescaled with aa&quot;</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rescaled_without_aa</span><span class="p">);</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;rescaled without aa&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_113_0.png" src="../_images/Intro_113_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>Seems like the anti aliasing filter prevents the poor pixelation effect to happen, making it look better but also less sharp.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the module and function to enlarge images</span>
+<span class="kn">from</span> <span class="nn">skimage.transform</span> <span class="kn">import</span> <span class="n">rescale</span>
+
+<span class="c1"># Import the data module</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
+
+<span class="c1"># Load the image from data</span>
+<span class="n">rocket_image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rocket</span><span class="p">()</span>
+
+<span class="c1"># Enlarge the image so it is 3 times bigger</span>
+<span class="n">enlarged_rocket_image</span> <span class="o">=</span> <span class="n">rescale</span><span class="p">(</span><span class="n">rocket_image</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">anti_aliasing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show original and resulting image</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rocket_image</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;original plot&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">enlarged_rocket_image</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;3 times enlarged image&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_115_0.png" src="../_images/Intro_115_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，從 600 pixels 擴展到 2500 pixels，畫面也不算變得太糊</p></li>
+<li><p>另外，我們也可以等比例的縮小圖片，例如下例:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dogs_banner</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 2/dogs_banner.jpg&quot;</span><span class="p">)</span>
+
+<span class="c1"># Import the module and function</span>
+<span class="kn">from</span> <span class="nn">skimage.transform</span> <span class="kn">import</span> <span class="n">resize</span>
+
+<span class="c1"># Set proportional height so its half its size</span>
+<span class="n">height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dogs_banner</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">dogs_banner</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Resize using the calculated proportional height and width</span>
+<span class="n">image_resized</span> <span class="o">=</span> <span class="n">resize</span><span class="p">(</span><span class="n">dogs_banner</span><span class="p">,</span> <span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">),</span>
+                       <span class="n">anti_aliasing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show original and resulting image</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dogs_banner</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;original image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_resized</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Resized image&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_117_0.png" src="../_images/Intro_117_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>我們成功地將照片縮小到 1/2 的像素，這些小圖片佔的空間更小，可以方便我們使用(e.g. 上傳到網頁之類的)</p></li>
+</ul>
+</div>
+<div class="section" id="morphology">
+<h3>Morphology<a class="headerlink" href="#morphology" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>morphology 的意思是 “型態”，就是要改變原圖的型態</p></li>
+<li><p>其實，我覺得從範例來看，他更像在更改輪廓</p></li>
+<li><p>這邊處理的資料都先限縮在 <code class="docutils literal notranslate"><span class="pre">binary</span></code> 的 image (就是做過 thresholding 的圖片，像素的亮度只剩下 0 or 1 兩種)</p></li>
+<li><p>更改輪廓的方式分為兩種：</p>
+<ul>
+<li><p>dilation(膨脹): 找到畫素為 1 的點，將它鄰近的點都設成1 (因為 1 表示白巳，所以膨脹可以擴大白色的範圍)</p></li>
+<li><p>erosion(腐蝕): 和 dilation 的做法相法，他是去找畫素為 0 的點，將他鄰近也都設為 0 (所以就像把輪廓變小)</p></li>
+</ul>
+</li>
+<li><p>來看例子：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">world_image_binary</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 2/world_image_binary.jpg&quot;</span><span class="p">)</span>
+<span class="n">world_image_binary</span> <span class="o">=</span> <span class="p">(</span><span class="n">world_image_binary</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">world_image_binary</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">world_image_binary</span><span class="o">.</span><span class="n">ravel</span><span class="p">());</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_121_0.png" src="../_images/Intro_121_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>接下來，示範 dialation 和 erotion</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the morphology module</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span>
+
+<span class="n">dilated_image</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_dilation</span><span class="p">(</span><span class="n">world_image_binary</span><span class="p">)</span>
+<span class="n">eroded_image</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">upper_r_image</span><span class="p">)</span> 
+
+<span class="c1"># See results</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">upper_r_image</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;original image&quot;</span><span class="p">);</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dilated_image</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;dialated image&quot;</span><span class="p">);</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">eroded_image_shape</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Eroded image&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/IPython/core/formatters.py</span> in <span class="ni">__call__</span><span class="nt">(self, obj)</span>
+<span class="g g-Whitespace">    </span><span class="mi">339</span>                 <span class="k">pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span>             <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">341</span>                 <span class="k">return</span> <span class="n">printer</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">342</span>             <span class="c1"># Finally look for special method names</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span>             <span class="n">method</span> <span class="o">=</span> <span class="n">get_real_method</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_method</span><span class="p">)</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/IPython/core/pylabtools.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(fig)</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span> 
+<span class="g g-Whitespace">    </span><span class="mi">247</span>     <span class="k">if</span> <span class="s1">&#39;png&#39;</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">248</span>         <span class="n">png_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">Figure</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">fig</span><span class="p">:</span> <span class="n">print_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">249</span>     <span class="k">if</span> <span class="s1">&#39;retina&#39;</span> <span class="ow">in</span> <span class="n">formats</span> <span class="ow">or</span> <span class="s1">&#39;png2x&#39;</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">250</span>         <span class="n">png_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">Figure</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">fig</span><span class="p">:</span> <span class="n">retina_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/IPython/core/pylabtools.py</span> in <span class="ni">print_figure</span><span class="nt">(fig, fmt, bbox_inches, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>         <span class="n">FigureCanvasBase</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span> 
+<span class="ne">--&gt; </span><span class="mi">132</span>     <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">print_figure</span><span class="p">(</span><span class="n">bytes_io</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">bytes_io</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span>     <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;svg&#39;</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/backend_bases.py</span> in <span class="ni">print_figure</span><span class="nt">(self, filename, dpi, facecolor, edgecolor, orientation, format, bbox_inches, pad_inches, bbox_extra_artists, backend, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2191</span>                            <span class="k">else</span> <span class="n">suppress</span><span class="p">())</span>
+<span class="g g-Whitespace">   </span><span class="mi">2192</span>                     <span class="k">with</span> <span class="n">ctx</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2193</span>                         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2194</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2195</span>                     <span class="n">bbox_inches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">get_tightbbox</span><span class="p">(</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> 
+<span class="ne">---&gt; </span><span class="mi">41</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/figure.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1861</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1862</span>             <span class="bp">self</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1863</span>             <span class="n">mimage</span><span class="o">.</span><span class="n">_draw_list_compositing_images</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1864</span>                 <span class="n">renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">suppressComposite</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1865</span> 
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">_draw_list_compositing_images</span><span class="nt">(renderer, parent, artists, suppress_composite)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span>     <span class="k">if</span> <span class="n">not_composite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">has_images</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">artists</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">131</span>             <span class="n">a</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>         <span class="c1"># Composite any adjacent images together</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> 
+<span class="ne">---&gt; </span><span class="mi">41</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/cbook/deprecation.py</span> in <span class="ni">wrapper</span><span class="nt">(*inner_args, **inner_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span>                          <span class="k">else</span> <span class="n">deprecation_addendum</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span>                 <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">411</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">inner_args</span><span class="p">,</span> <span class="o">**</span><span class="n">inner_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span> 
+<span class="g g-Whitespace">    </span><span class="mi">413</span>     <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer, inframe)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2745</span>             <span class="n">renderer</span><span class="o">.</span><span class="n">stop_rasterizing</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">2746</span> 
+<span class="ne">-&gt; </span><span class="mi">2747</span>         <span class="n">mimage</span><span class="o">.</span><span class="n">_draw_list_compositing_images</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2748</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2749</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">close_group</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">)</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">_draw_list_compositing_images</span><span class="nt">(renderer, parent, artists, suppress_composite)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span>     <span class="k">if</span> <span class="n">not_composite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">has_images</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">artists</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">131</span>             <span class="n">a</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>         <span class="c1"># Composite any adjacent images together</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> 
+<span class="ne">---&gt; </span><span class="mi">41</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">639</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">draw_image</span><span class="p">(</span><span class="n">gc</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">im</span><span class="p">,</span> <span class="n">trans</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">640</span>         <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">641</span>             <span class="n">im</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">trans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_image</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">642</span>                 <span class="n">renderer</span><span class="p">,</span> <span class="n">renderer</span><span class="o">.</span><span class="n">get_image_magnification</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">643</span>             <span class="k">if</span> <span class="n">im</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">make_image</span><span class="nt">(self, renderer, magnification, unsampled)</span>
+<span class="g g-Whitespace">    </span><span class="mi">924</span>         <span class="n">clip</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">get_clip_box</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clip_on</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">925</span>                 <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">926</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">transformed_bbox</span><span class="p">,</span> <span class="n">clip</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">927</span>                                 <span class="n">magnification</span><span class="p">,</span> <span class="n">unsampled</span><span class="o">=</span><span class="n">unsampled</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">928</span> 
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">_make_image</span><span class="nt">(self, A, in_bbox, out_bbox, clip_bbox, magnification, unsampled, round_to_pixel_border)</span>
+<span class="g g-Whitespace">    </span><span class="mi">548</span>                     <span class="n">A</span> <span class="o">=</span> <span class="n">_rgb_to_rgba</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">549</span>                 <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_scalar_alpha</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">550</span>                 <span class="n">output_alpha</span> <span class="o">=</span> <span class="n">_resample</span><span class="p">(</span>  <span class="c1"># resample alpha channel</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span>                     <span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">out_shape</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">552</span>                 <span class="n">output</span> <span class="o">=</span> <span class="n">_resample</span><span class="p">(</span>  <span class="c1"># resample rgb channels</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">_resample</span><span class="nt">(image_obj, data, out_shape, transform, resample, alpha)</span>
+<span class="g g-Whitespace">    </span><span class="mi">190</span>     <span class="k">if</span> <span class="n">resample</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">191</span>         <span class="n">resample</span> <span class="o">=</span> <span class="n">image_obj</span><span class="o">.</span><span class="n">get_resample</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">192</span>     <span class="n">_image</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span>                     <span class="n">_interpd_</span><span class="p">[</span><span class="n">interpolation</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span>                     <span class="n">resample</span><span class="p">,</span>
+
+<span class="ne">ValueError</span>: Unsupported dtype
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 720x720 with 3 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">upper_r_image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 2/r5.png&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">upper_r_image</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">256</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_124_0.png" src="../_images/Intro_124_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the morphology module</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">morphology</span>
+
+<span class="c1"># Obtain the eroded shape </span>
+<span class="n">eroded_image_shape</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">binary_erosion</span><span class="p">(</span><span class="n">upper_r_image</span><span class="p">)</span> 
+
+<span class="c1"># See results</span>
+<span class="c1"># Show original and resulting image</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">upper_r_image</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;original image&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">eroded_image_shape</span><span class="p">);</span>
+<span class="c1">#ax[1].set_title(&quot;Eroded image&quot;);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/IPython/core/formatters.py</span> in <span class="ni">__call__</span><span class="nt">(self, obj)</span>
+<span class="g g-Whitespace">    </span><span class="mi">339</span>                 <span class="k">pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span>             <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">341</span>                 <span class="k">return</span> <span class="n">printer</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">342</span>             <span class="c1"># Finally look for special method names</span>
+<span class="g g-Whitespace">    </span><span class="mi">343</span>             <span class="n">method</span> <span class="o">=</span> <span class="n">get_real_method</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_method</span><span class="p">)</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/IPython/core/pylabtools.py</span> in <span class="ni">&lt;lambda&gt;</span><span class="nt">(fig)</span>
+<span class="g g-Whitespace">    </span><span class="mi">246</span> 
+<span class="g g-Whitespace">    </span><span class="mi">247</span>     <span class="k">if</span> <span class="s1">&#39;png&#39;</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">248</span>         <span class="n">png_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">Figure</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">fig</span><span class="p">:</span> <span class="n">print_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">249</span>     <span class="k">if</span> <span class="s1">&#39;retina&#39;</span> <span class="ow">in</span> <span class="n">formats</span> <span class="ow">or</span> <span class="s1">&#39;png2x&#39;</span> <span class="ow">in</span> <span class="n">formats</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">250</span>         <span class="n">png_formatter</span><span class="o">.</span><span class="n">for_type</span><span class="p">(</span><span class="n">Figure</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">fig</span><span class="p">:</span> <span class="n">retina_figure</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/IPython/core/pylabtools.py</span> in <span class="ni">print_figure</span><span class="nt">(fig, fmt, bbox_inches, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>         <span class="n">FigureCanvasBase</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span> 
+<span class="ne">--&gt; </span><span class="mi">132</span>     <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">print_figure</span><span class="p">(</span><span class="n">bytes_io</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>     <span class="n">data</span> <span class="o">=</span> <span class="n">bytes_io</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span>     <span class="k">if</span> <span class="n">fmt</span> <span class="o">==</span> <span class="s1">&#39;svg&#39;</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/backend_bases.py</span> in <span class="ni">print_figure</span><span class="nt">(self, filename, dpi, facecolor, edgecolor, orientation, format, bbox_inches, pad_inches, bbox_extra_artists, backend, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2191</span>                            <span class="k">else</span> <span class="n">suppress</span><span class="p">())</span>
+<span class="g g-Whitespace">   </span><span class="mi">2192</span>                     <span class="k">with</span> <span class="n">ctx</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2193</span>                         <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2194</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2195</span>                     <span class="n">bbox_inches</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">get_tightbbox</span><span class="p">(</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> 
+<span class="ne">---&gt; </span><span class="mi">41</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/figure.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1861</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1862</span>             <span class="bp">self</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1863</span>             <span class="n">mimage</span><span class="o">.</span><span class="n">_draw_list_compositing_images</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1864</span>                 <span class="n">renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">suppressComposite</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1865</span> 
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">_draw_list_compositing_images</span><span class="nt">(renderer, parent, artists, suppress_composite)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span>     <span class="k">if</span> <span class="n">not_composite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">has_images</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">artists</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">131</span>             <span class="n">a</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>         <span class="c1"># Composite any adjacent images together</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> 
+<span class="ne">---&gt; </span><span class="mi">41</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/cbook/deprecation.py</span> in <span class="ni">wrapper</span><span class="nt">(*inner_args, **inner_kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">409</span>                          <span class="k">else</span> <span class="n">deprecation_addendum</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">410</span>                 <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">411</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">inner_args</span><span class="p">,</span> <span class="o">**</span><span class="n">inner_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">412</span> 
+<span class="g g-Whitespace">    </span><span class="mi">413</span>     <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/axes/_base.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer, inframe)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2745</span>             <span class="n">renderer</span><span class="o">.</span><span class="n">stop_rasterizing</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">2746</span> 
+<span class="ne">-&gt; </span><span class="mi">2747</span>         <span class="n">mimage</span><span class="o">.</span><span class="n">_draw_list_compositing_images</span><span class="p">(</span><span class="n">renderer</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">artists</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2748</span> 
+<span class="g g-Whitespace">   </span><span class="mi">2749</span>         <span class="n">renderer</span><span class="o">.</span><span class="n">close_group</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">)</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">_draw_list_compositing_images</span><span class="nt">(renderer, parent, artists, suppress_composite)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span>     <span class="k">if</span> <span class="n">not_composite</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">has_images</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">130</span>         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">artists</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">131</span>             <span class="n">a</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">renderer</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>         <span class="c1"># Composite any adjacent images together</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/artist.py</span> in <span class="ni">draw_wrapper</span><span class="nt">(artist, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">39</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">start_filter</span><span class="p">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">40</span> 
+<span class="ne">---&gt; </span><span class="mi">41</span>             <span class="k">return</span> <span class="n">draw</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">renderer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>         <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>             <span class="k">if</span> <span class="n">artist</span><span class="o">.</span><span class="n">get_agg_filter</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">draw</span><span class="nt">(self, renderer, *args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">639</span>                 <span class="n">renderer</span><span class="o">.</span><span class="n">draw_image</span><span class="p">(</span><span class="n">gc</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">im</span><span class="p">,</span> <span class="n">trans</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">640</span>         <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">641</span>             <span class="n">im</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">trans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_image</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">642</span>                 <span class="n">renderer</span><span class="p">,</span> <span class="n">renderer</span><span class="o">.</span><span class="n">get_image_magnification</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">643</span>             <span class="k">if</span> <span class="n">im</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">make_image</span><span class="nt">(self, renderer, magnification, unsampled)</span>
+<span class="g g-Whitespace">    </span><span class="mi">924</span>         <span class="n">clip</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">get_clip_box</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clip_on</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">925</span>                 <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">figure</span><span class="o">.</span><span class="n">bbox</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">926</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">transformed_bbox</span><span class="p">,</span> <span class="n">clip</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">927</span>                                 <span class="n">magnification</span><span class="p">,</span> <span class="n">unsampled</span><span class="o">=</span><span class="n">unsampled</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">928</span> 
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">_make_image</span><span class="nt">(self, A, in_bbox, out_bbox, clip_bbox, magnification, unsampled, round_to_pixel_border)</span>
+<span class="g g-Whitespace">    </span><span class="mi">548</span>                     <span class="n">A</span> <span class="o">=</span> <span class="n">_rgb_to_rgba</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">549</span>                 <span class="n">alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_scalar_alpha</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">550</span>                 <span class="n">output_alpha</span> <span class="o">=</span> <span class="n">_resample</span><span class="p">(</span>  <span class="c1"># resample alpha channel</span>
+<span class="g g-Whitespace">    </span><span class="mi">551</span>                     <span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">out_shape</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">552</span>                 <span class="n">output</span> <span class="o">=</span> <span class="n">_resample</span><span class="p">(</span>  <span class="c1"># resample rgb channels</span>
+
+<span class="nn">~/.pyenv/versions/3.8.0/lib/python3.8/site-packages/matplotlib/image.py</span> in <span class="ni">_resample</span><span class="nt">(image_obj, data, out_shape, transform, resample, alpha)</span>
+<span class="g g-Whitespace">    </span><span class="mi">190</span>     <span class="k">if</span> <span class="n">resample</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">191</span>         <span class="n">resample</span> <span class="o">=</span> <span class="n">image_obj</span><span class="o">.</span><span class="n">get_resample</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">192</span>     <span class="n">_image</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">193</span>                     <span class="n">_interpd_</span><span class="p">[</span><span class="n">interpolation</span><span class="p">],</span>
+<span class="g g-Whitespace">    </span><span class="mi">194</span>                     <span class="n">resample</span><span class="p">,</span>
+
+<span class="ne">ValueError</span>: Unsupported dtype
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 720x720 with 2 Axes&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="image-restoration">
+<h2>Image restoration(影像修復)<a class="headerlink" href="#image-restoration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h3>重建指定的區域<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>這邊的應用，我把它想成 missing data 的插補，舉例來說以下兩張圖：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">defect_image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 3/damaged_astronaut.png&quot;</span><span class="p">)</span>
+<span class="n">image_with_logo</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 3/4.2.06_w_logo_2_2.png&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">defect_image</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_with_logo</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_129_0.png" src="../_images/Intro_129_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p>可以看到，左圖的頭的旁邊，有一塊黑色區域，被挖掉了。右圖則是船的旁邊，多了 datacamp 的 logo.</p></li>
+<li><p>那我現在想做的，就是把左邊的黑色區域補起來，右邊的 logo 移除.</p></li>
+<li><p>那作法就是：</p>
+<ul>
+<li><p>我先做出一個 mask (和原圖有一樣的 shape ，但指定的區域給他數值 1，其他就數值 0).</p></li>
+<li><p>用 <code class="docutils literal notranslate"><span class="pre">skimage.inpaint.inpaint_biharmonic()</span></code> 來做補值，補哪裡？補 mask 所指的地方.</p></li>
+</ul>
+</li>
+<li><p>來看右圖的範例：</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the mask</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">image_with_logo</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Set the pixels where the logo is to 1</span>
+<span class="n">mask</span><span class="p">[</span><span class="mi">210</span><span class="p">:</span><span class="mi">290</span><span class="p">,</span> <span class="mi">360</span><span class="p">:</span><span class="mi">425</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># Apply inpainting to remove the logo</span>
+<span class="n">image_logo_removed</span> <span class="o">=</span> <span class="n">inpaint</span><span class="o">.</span><span class="n">inpaint_biharmonic</span><span class="p">(</span><span class="n">image_with_logo</span><span class="p">,</span>
+                                  <span class="n">mask</span><span class="p">,</span>
+                                  <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show the original and logo removed images</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">));</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_with_logo</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Image with logo&quot;</span><span class="p">);</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_logo_removed</span><span class="p">);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Image with logo removed&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Intro_131_0.png" src="../_images/Intro_131_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the module from restoration</span>
+<span class="kn">from</span> <span class="nn">skimage.restoration</span> <span class="kn">import</span> <span class="n">inpaint</span>
+
+<span class="c1"># Apply the restoration function to the image using the mask</span>
+<span class="n">restored_image</span> <span class="o">=</span> <span class="n">inpaint</span><span class="o">.</span><span class="n">inpaint_biharmonic</span><span class="p">(</span><span class="n">defect_image</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># mask 要自己建，他沒告訴你怎麼做，直接 preload 給你，傻眼</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">restored_image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">183</span><span class="o">-</span><span class="mi">9</span><span class="n">f0b71eb27a8</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">skimage.restoration</span> <span class="kn">import</span> <span class="n">inpaint</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">mask</span> <span class="o">=</span> <span class="n">get_mask</span><span class="p">(</span><span class="n">defect_image</span><span class="p">)</span> <span class="c1"># 找出 defect 的區域</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># Apply the restoration function to the image using the mask</span>
+
+<span class="ne">NameError</span>: name &#39;get_mask&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="denoise">
+<h3>Denoise<a class="headerlink" href="#denoise" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>denoise 的方法有四種，基本上都沒講原理，給你 code 而已：</p>
+<ul>
+<li><p>Total variation (TV): 用 <code class="docutils literal notranslate"><span class="pre">skimage.restoration.denoise_tv_chambolle()</span></code></p></li>
+<li><p>Bilateral: 適用於想要同時保留 edges。 用 <code class="docutils literal notranslate"><span class="pre">skimage.restoration.denoise_bilateral()</span></code></p></li>
+<li><p>Wavelet denoising.</p></li>
+<li><p>Non-local means denoising</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">landscape_image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 3/noise-noisy-nature.jpg&quot;</span><span class="p">)</span>
+
+<span class="c1"># Import bilateral denoising function</span>
+<span class="kn">from</span> <span class="nn">skimage.restoration</span> <span class="kn">import</span> <span class="n">denoise_tv_chambolle</span><span class="p">,</span> <span class="n">denoise_bilateral</span>
+
+<span class="c1"># Apply bilateral filter denoising</span>
+<span class="n">tv_denoised_image</span> <span class="o">=</span> <span class="n">denoise_tv_chambolle</span><span class="p">(</span><span class="n">landscape_image</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">bi_denoised_image</span> <span class="o">=</span> <span class="n">denoise_bilateral</span><span class="p">(</span><span class="n">landscape_image</span><span class="p">,</span> <span class="n">multichannel</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Show original and resulting images</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">landscape_image</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Noisy image&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tv_denoised_image</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Denoised by total variation&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">bi_denoised_image</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Denoised by bilateral&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Denoised by bilateral&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Intro_135_1.png" src="../_images/Intro_135_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="superpixel-segementation">
+<h3>Superpixel segementation<a class="headerlink" href="#superpixel-segementation" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>這邊的概念是，把一張圖上的 pixel 做分群</p></li>
+<li><p>例如下圖，本來有 265x191 = 50615 個 pixel，我們想把他分成 400 個 region.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">face_image</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;dataset/chapter 3/chinese.jpg&quot;</span><span class="p">)</span>
+
+<span class="c1"># Import the slic function from segmentation module</span>
+<span class="kn">from</span> <span class="nn">skimage.segmentation</span> <span class="kn">import</span> <span class="n">slic</span>
+
+<span class="c1"># Import the label2rgb function from color module</span>
+<span class="kn">from</span> <span class="nn">skimage.color</span> <span class="kn">import</span> <span class="n">label2rgb</span>
+
+<span class="c1"># Obtain the segmentation with 400 regions</span>
+<span class="n">segments</span> <span class="o">=</span> <span class="n">slic</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="n">n_segments</span> <span class="o">=</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="c1"># Put segments on top of original image to compare</span>
+<span class="n">segmented_image</span> <span class="o">=</span> <span class="n">label2rgb</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">face_image</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">)</span>
+
+<span class="c1"># Show the segmented image</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">face_image</span><span class="p">,</span> <span class="s2">&quot;original image&quot;</span><span class="p">)</span>
+<span class="n">show_image</span><span class="p">(</span><span class="n">segmented_image</span><span class="p">,</span> <span class="s2">&quot;Segmented image, 400 superpixels&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-198-de831a9c1cc8&gt;:10: FutureWarning: skimage.measure.label&#39;s indexing starts from 0. In future version it will start from 1. To disable this warning, explicitely set the `start_label` parameter to 1.
+  segments = slic(face_image, n_segments = 400)
+&lt;ipython-input-198-de831a9c1cc8&gt;:13: FutureWarning: The new recommended value for bg_label is 0. Until version 0.19, the default bg_label value is -1. From version 0.19, the bg_label default value will be 0. To avoid this warning, please explicitly set bg_label value.
+  segmented_image = label2rgb(segments, face_image, kind=&#39;avg&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Intro_138_1.png" src="../_images/Intro_138_1.png" />
+<img alt="../_images/Intro_138_2.png" src="../_images/Intro_138_2.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./datacamp"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By HY<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
