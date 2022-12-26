@@ -1,0 +1,26 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+parts:
+  - caption: Image processing
+    numbered: true
+    chapters:
+      - file: read_show_save_imgs
+      - file: color_transform
+      - file: opencv_king_book/ch13/ch13_gradient_and_edge_detection
+      - file: pyimage/opencv/opencv-cropping/opencv_crop
+      - file: opencv_king_book/ch11/spatial_smoothing
+
+# build book ------
+# cd mybook
+# jupyter-book build .
+# git add --all
+# git commit -m ""
+# git push
+
+# publish to github
+# pip install ghp-import
+# cd mybook
+# ghp-import -n -p -f _build/html
